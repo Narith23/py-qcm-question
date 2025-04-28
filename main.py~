@@ -1,0 +1,57 @@
+import random
+
+def run_quiz():
+    # ANSI color codes
+    RED = "\033[91m"
+    GREEN = "\033[92m"
+    YELLOW = "\033[93m"
+    CYAN = "\033[96m"
+    RESET = "\033[0m"
+
+    questions = [
+        {
+            "question": "តើរាជធានីរបស់ប្រទេសបារាំងជាអ្វី?",
+            "options": ["1) ប៉ារីស", "2) លុងដ៍", "3) រ៉ូម", "4) បឺរឡាំង"],
+            "answer": "1"
+        },
+        {
+            "question": "តើភាសាណាដែលប្រើសម្រាប់អភិវឌ្ឍកម្មវិធីគេហទំព័រ?",
+            "options": ["1) Python", "2) JavaScript", "3) Java", "4) ទាំងអស់ខាងលើ"],
+            "answer": "4"
+        },
+        {
+            "question": "តើអ្នកណាជាអ្នកបង្កើតភាសា Python?",
+            "options": ["1) អីឡុន ម៉ាស្ក", "2) ប៊ីល ហ្គេត", "3) គីដូ វ៉ាន់ រ៉ូស៊ុំ", "4) ម៉ាក ស៊ុគកឺប៊ឺគ"],
+            "answer": "3"
+        }
+    ]
+
+    score = 0
+
+    # Randomize the question order
+    random.shuffle(questions)
+
+    for q in questions:
+        print(f"\n{CYAN}{q['question']}{RESET}")
+        for option in q["options"]:
+            print(YELLOW + option + RESET)
+        user_answer = input("បញ្ចូលលេខចម្លើយរបស់អ្នក (Enter the number of your answer): ")
+
+        if user_answer == q["answer"]:
+            score += 1
+
+    # Calculate percentage
+    percentage = (score / len(questions)) * 100
+
+    # Choose color based on percentage
+    if percentage < 25:
+        color = RED
+    elif percentage < 50:
+        color = YELLOW
+    else:
+        color = GREEN
+
+    print(f"\n{color}ពិន្ទុចុងក្រោយរបស់អ្នកគឺ {score}/{len(questions)} ({percentage:.2f}%).{RESET}")
+
+if __name__ == "__main__":
+    run_quiz()
